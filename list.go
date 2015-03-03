@@ -24,6 +24,17 @@ func (l *List) First() (value interface{}) {
   return
 }
 
+func (l *List) Last() (value interface{}) {
+  if l.size == 0 {
+    return
+  }
+
+  var i *item
+  for i = l.head; i.next != nil; i = i.next {}
+  value = i.value
+  return
+}
+
 func (l *List) Next() (value interface{}) {
   if l.next != nil {
     value = l.next.value
