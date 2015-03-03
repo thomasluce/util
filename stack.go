@@ -11,11 +11,6 @@
 
 package util
 
-type item struct {
-  value interface{}
-  next  *item
-}
-
 //Stack the implementation of stack
 //this stack is not thread safe!
 type Stack struct {
