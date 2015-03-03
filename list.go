@@ -19,7 +19,7 @@ func (l *List) Len() int {
 func (l *List) First() (value interface{}) {
   if l.size > 0 {
     value = l.head.value
-    l.next = l.head
+    l.next = l.head.next
   }
   return
 }
