@@ -1,5 +1,9 @@
 package util
 
+import (
+  "fmt"
+)
+
 type item struct {
   value interface{}
   next *item
@@ -60,4 +64,12 @@ func (l *List) Add(value interface{}) {
     next: nil,
   }
   l.size += 1
+}
+
+func (l *List) String() (string) {
+  result := ""
+  for temp := l.First(); temp != nil; temp = l.Next() {
+    result += "-> " + fmt.Sprintf("%v", temp)
+  }
+  return result
 }
