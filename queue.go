@@ -15,3 +15,8 @@ func (q *Queue) Pop() interface{} {
   *q = (*q)[1:]
   return n
 }
+
+func (q *Queue) Len() int {
+  return len(*q)
+}
+
