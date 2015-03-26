@@ -6,11 +6,12 @@ import (
 )
 
 // Do a thing, or timeout in `timeout` seconds
-func Timeout(todo func(), timeout int) error {
+func Timeout(todo func(chan bool), timeout int) error {
 	to := make(chan bool, 1)
 	done := make(chan bool, 1)
+	stop := make(chan bool, 1)
 	go func() {
-		todo()
+		todo(stop)
 		done <- true
 	}()
 
@@ -23,6 +24,7 @@ func Timeout(todo func(), timeout int) error {
 	case <-done:
 		return nil
 	case <-to:
+		stop <- true
 		return errors.New("Timeout")
 	}
 }
