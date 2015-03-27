@@ -21,6 +21,10 @@ func LoggingLevel() LogLevel {
 	return logLevel
 }
 
+func DisableLogging() {
+	logLevel = FATAL + 1
+}
+
 func SetLoggingLevel(level LogLevel) {
 	if level < 0 || level > FATAL {
 		panic("Not a valid log level")
