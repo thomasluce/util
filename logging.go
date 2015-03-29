@@ -1,6 +1,9 @@
 package util
 
-import "log"
+import (
+	"log"
+	"os"
+)
 
 // This is meant to be a better logging package that uses the default logger,
 // but doesn't just spam the crap out of everything.
@@ -23,6 +26,14 @@ func LoggingLevel() LogLevel {
 
 func DisableLogging() {
 	logLevel = FATAL + 1
+}
+
+func SetOutput(filename string) {
+	f, err := os.OpenFile(filename, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+	if err != nil {
+		panic(err.Error())
+	}
+	log.SetOutput(f)
 }
 
 func SetLoggingLevel(level LogLevel) {
