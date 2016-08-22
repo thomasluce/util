@@ -41,6 +41,15 @@ func SetLoggingLevel(level LogLevel) {
 		panic("Not a valid log level")
 	}
 	logLevel = level
+
+	// FIXME: This needs to have a way to pass the calling function's file and
+	// line information around, otherwise it all looks like it comes from here,
+	// which is fucking useless.
+	if logLevel <= DEBUG {
+		log.SetFlags(log.LstdFlags | log.Lshortfile)
+	} else {
+		log.SetFlags(log.LstdFlags)
+	}
 }
 
 func Info(msg string) {
