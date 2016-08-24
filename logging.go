@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"log"
 	"os"
 )
@@ -42,9 +43,6 @@ func SetLoggingLevel(level LogLevel) {
 	}
 	logLevel = level
 
-	// FIXME: This needs to have a way to pass the calling function's file and
-	// line information around, otherwise it all looks like it comes from here,
-	// which is fucking useless.
 	if logLevel <= DEBUG {
 		log.SetFlags(log.LstdFlags | log.Lshortfile)
 	} else {
@@ -55,42 +53,42 @@ func SetLoggingLevel(level LogLevel) {
 func Info(msg string) {
 	if logLevel <= INFO {
 		log.SetPrefix("[INFO] ")
-		log.Print(msg)
+		log.Output(2, msg)
 	}
 }
 
 func Infof(msg string, args ...interface{}) {
 	if logLevel <= INFO {
 		log.SetPrefix("[INFO] ")
-		log.Printf(msg, args...)
+		log.Output(2, fmt.Sprintf(msg, args...))
 	}
 }
 
 func Debug(msg string) {
 	if logLevel <= DEBUG {
 		log.SetPrefix("[DEBUG] ")
-		log.Print(msg)
+		log.Output(2, msg)
 	}
 }
 
 func Debugf(msg string, args ...interface{}) {
 	if logLevel <= DEBUG {
 		log.SetPrefix("[DEBUG] ")
-		log.Printf(msg, args...)
+		log.Output(2, fmt.Sprintf(msg, args...))
 	}
 }
 
 func Warn(msg string) {
 	if logLevel <= WARN {
 		log.SetPrefix("[WARN] ")
-		log.Print(msg)
+		log.Output(2, msg)
 	}
 }
 
 func Warnf(msg string, args ...interface{}) {
 	if logLevel <= WARN {
 		log.SetPrefix("[WARN] ")
-		log.Printf(msg, args...)
+		log.Output(2, fmt.Sprintf(msg, args...))
 	}
 }
 
